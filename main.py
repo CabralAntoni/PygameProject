@@ -25,6 +25,13 @@ while running:
     # draw joueur
     screen.blit(game.player.image, game.player.rect)
 
+    #Deplacement du joueur
+    if game.pressed.get(pygame.K_RIGHT)and game.player.rect.x + game.player.rect.width < screen.get_width():
+        game.player.moveRight()
+    elif game.pressed.get(pygame.K_LEFT) and game.player.rect.x - 31:
+        game.player.moveLeft()
+
+
     # Update ecran
 
     pygame.display.flip()
@@ -33,7 +40,6 @@ while running:
             running = False
             pygame.quit()
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                game.player.moveRight()
-            elif event.key == pygame.K_LEFT:
-                game.player.moveLeft()
+            game.pressed[event.key] = True
+        elif event.type == pygame.KEYUP:
+            game.pressed[event.key] = False
