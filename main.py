@@ -1,25 +1,7 @@
 import pygame
+from game import Game
 
 pygame.init()
-
-class Game :
-
-    def __init__(self):
-        self.player = Player()
-
-
-class Player(pygame.sprite.Sprite):
-
-    def __init__(self):
-        super().__init__()
-        self.health = 100
-        self.maxHealth = 100
-        self.attack = 10
-        self.velocity = 5
-        self.image = pygame.image.load("assets/player.png")
-        self.rect = self.image.get_rect()
-        self.rect.x = 450
-        self.rect.y = 450
 
 
 # Fenetre PyGame
@@ -50,3 +32,8 @@ while running:
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                game.player.moveRight()
+            elif event.key == pygame.K_LEFT:
+                game.player.moveLeft()
